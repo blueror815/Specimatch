@@ -10,6 +10,7 @@
 
 @interface SignupVC ()
 
+@property (weak, nonatomic) IBOutlet UIView* wrapper;
 @property (weak, nonatomic) IBOutlet UIView* firstnameWrapper;
 @property (weak, nonatomic) IBOutlet UITextField* firstnameField;
 @property (weak, nonatomic) IBOutlet UIView* lastnameWrapper;
@@ -27,13 +28,26 @@
 @property (weak, nonatomic) IBOutlet UIButton* payButton;
 @property (weak, nonatomic) IBOutlet UIButton* haveAccountButton;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint* wrapperTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint* wrapperBottom;
+
+@property (strong, nonatomic) UITextField* curTextField;
+
 @end
 
 @implementation SignupVC
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
     
     self.firstnameWrapper.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.firstnameWrapper.layer.borderWidth = 1.f;
@@ -94,6 +108,81 @@
     [self.passwordField resignFirstResponder];
     [self.confirmField resignFirstResponder];
     [self.inviteCodeField resignFirstResponder];
+}
+
+
+#pragma mark -
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField*)sender {
+    self.curTextField = sender;
+    
+    if ([self.curTextField respondsToSelector:@selector(inputAssistantItem)]) {
+        UITextInputAssistantItem* item = [self.curTextField inputAssistantItem];
+        item.leadingBarButtonGroups = @[];
+        item.trailingBarButtonGroups = @[];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    if ([textField isEqual:self.emailField]) {
+        [self.passwordField becomeFirstResponder];
+    }
+    else if ([textField isEqual:self.passwordField]) {
+        [self tapPayButton:nil];
+    }
+    return YES;
+}
+
+
+#pragma mark -
+#pragma mark - Keyboard delegate
+
+- (void)keyboardWillShow:(NSNotification*)notif {
+    
+    CGRect keyboardBounds;
+    [[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    NSNumber *duration = [notif.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+    
+    [self animateTextFieldUp:YES duration:(CGFloat)duration.floatValue keyboardBounds:keyboardBounds];
+}
+
+- (void)keyboardWillHide:(NSNotification*)notif {
+    
+    CGRect keyboardBounds;
+    [[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    NSNumber *duration = [notif.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+    
+    [self animateTextFieldUp:NO duration:(CGFloat)duration.floatValue keyboardBounds:keyboardBounds];
+}
+
+- (void)animateTextFieldUp:(BOOL)up duration:(CGFloat)duration keyboardBounds:(CGRect)keyboardBounds {
+    
+    if (up) {
+        CGFloat maxY = CGRectGetMaxY(self.curTextField.superview.frame);
+        CGFloat offset = maxY + CGRectGetHeight(keyboardBounds) + 10.f - CGRectGetHeight(self.wrapper.frame);
+        if (offset < 0)
+            offset = 0.f;
+        
+        self.wrapperTop.constant = -offset;
+        self.wrapperBottom.constant = offset;
+    }
+    else {
+        self.wrapperTop.constant = 0.f;
+        self.wrapperBottom.constant = 0.f;
+    }
+    
+    [UIView animateWithDuration:duration animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 

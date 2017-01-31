@@ -16,8 +16,19 @@
 
 #import "Define.h"
 
+#import "SVProgressHUD.h"
+
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+
+
+#import "AlertManager.h"
+#import "UtilManager.h"
+
+
 #import "AppDelegate.h"
 
+#import "APIManager.h"
 
 
 #endif /* PrefixHeader_pch */

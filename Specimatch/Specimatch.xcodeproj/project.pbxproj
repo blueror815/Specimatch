@@ -23,6 +23,9 @@
 		C41325F51E40DED300451E06 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C41325F41E40DED300451E06 /* ProfileVC.m */; };
 		C41325F81E40DEE100451E06 /* SpecimatchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C41325F71E40DEE100451E06 /* SpecimatchVC.m */; };
 		C41325FB1E40DEF200451E06 /* TutorialsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C41325FA1E40DEF200451E06 /* TutorialsVC.m */; };
+		C41326031E41096000451E06 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41325FE1E41096000451E06 /* AlertManager.m */; };
+		C41326041E41096000451E06 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41326001E41096000451E06 /* APIManager.m */; };
+		C41326051E41096000451E06 /* UtilManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41326021E41096000451E06 /* UtilManager.m */; };
 		C4A8BB3C1E3DB159007E833D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8BB3B1E3DB159007E833D /* main.m */; };
 		C4A8BB3F1E3DB159007E833D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A8BB3E1E3DB159007E833D /* AppDelegate.m */; };
 		C4A8BB451E3DB159007E833D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A8BB431E3DB159007E833D /* Main.storyboard */; };
@@ -66,6 +69,12 @@
 		C41325F71E40DEE100451E06 /* SpecimatchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecimatchVC.m; sourceTree = "<group>"; };
 		C41325F91E40DEF200451E06 /* TutorialsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialsVC.h; sourceTree = "<group>"; };
 		C41325FA1E40DEF200451E06 /* TutorialsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialsVC.m; sourceTree = "<group>"; };
+		C41325FD1E41096000451E06 /* AlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
+		C41325FE1E41096000451E06 /* AlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
+		C41325FF1E41096000451E06 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		C41326001E41096000451E06 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		C41326011E41096000451E06 /* UtilManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilManager.h; sourceTree = "<group>"; };
+		C41326021E41096000451E06 /* UtilManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilManager.m; sourceTree = "<group>"; };
 		C4A8BB371E3DB159007E833D /* Specimatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Specimatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4A8BB3B1E3DB159007E833D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4A8BB3D1E3DB159007E833D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -215,6 +224,19 @@
 			path = Tutorials;
 			sourceTree = "<group>";
 		};
+		C41325FC1E41096000451E06 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C41325FD1E41096000451E06 /* AlertManager.h */,
+				C41325FE1E41096000451E06 /* AlertManager.m */,
+				C41325FF1E41096000451E06 /* APIManager.h */,
+				C41326001E41096000451E06 /* APIManager.m */,
+				C41326011E41096000451E06 /* UtilManager.h */,
+				C41326021E41096000451E06 /* UtilManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		C4A8BB2E1E3DB159007E833D = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +258,7 @@
 		C4A8BB391E3DB159007E833D /* Specimatch */ = {
 			isa = PBXGroup;
 			children = (
+				C41325FC1E41096000451E06 /* Managers */,
 				C40135921E3E579A0047DFEA /* SlideMenu */,
 				C401358B1E3E57170047DFEA /* Controllers */,
 				C40135AD1E3E58860047DFEA /* Define.h */,
@@ -382,9 +405,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C40135A21E3E579A0047DFEA /* UIViewController+SlideMenu.m in Sources */,
+				C41326041E41096000451E06 /* APIManager.m in Sources */,
 				C41325F51E40DED300451E06 /* ProfileVC.m in Sources */,
 				C4A8BB3F1E3DB159007E833D /* AppDelegate.m in Sources */,
 				C41325F81E40DEE100451E06 /* SpecimatchVC.m in Sources */,
+				C41326051E41096000451E06 /* UtilManager.m in Sources */,
 				C40135A11E3E579A0047DFEA /* SlideMenuMainViewController.m in Sources */,
 				C41325E51E4049A500451E06 /* MainVC.m in Sources */,
 				C41325E61E4049A500451E06 /* MenuCell.m in Sources */,
@@ -393,6 +418,7 @@
 				C41325F21E40DEBE00451E06 /* HealthRecordVC.m in Sources */,
 				C4A8BB3C1E3DB159007E833D /* main.m in Sources */,
 				C41325E71E4049A500451E06 /* SignupVC.m in Sources */,
+				C41326031E41096000451E06 /* AlertManager.m in Sources */,
 				C401359F1E3E579A0047DFEA /* SlideMenuLeftMenuSegue.m in Sources */,
 				C41325EF1E40DEAD00451E06 /* CareTimelineVC.m in Sources */,
 				C41325FB1E40DEF200451E06 /* TutorialsVC.m in Sources */,
